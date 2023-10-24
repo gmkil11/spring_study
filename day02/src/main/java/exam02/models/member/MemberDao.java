@@ -2,8 +2,7 @@ package exam02.models.member;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MemberDao {
     private static Map<String, Member> members = new HashMap<>();
@@ -17,6 +16,10 @@ public class MemberDao {
 
     public Member get(String userId){
         return members.get(userId);
+    }
+
+    public List<Member> gets(){
+        return new ArrayList<>(members.values());
     }
 
     public boolean exists(String userId){
