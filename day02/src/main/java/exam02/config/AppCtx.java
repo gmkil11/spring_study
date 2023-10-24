@@ -33,4 +33,9 @@ public class AppCtx {
     public LoginService loginService() {
         return new LoginService(loginValidator(), memberDao());
     }
+
+    @Bean
+    public InfoService infoService() {
+        return new InfoService(memberDao());
+    }
 }
