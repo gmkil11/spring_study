@@ -1,4 +1,4 @@
-package exam02.models.member;
+package exam04.models.member;
 
 import exam02.commons.BadRequestException;
 import exam02.commons.LengthValidator;

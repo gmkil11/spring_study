@@ -1,7 +1,8 @@
-package exam02.models.member;
+package exam03.models.member;
 
 import exam02.commons.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,6 +10,7 @@ public class JoinService {
 
     @Autowired
     private Validator<Member> validator;
+
     @Autowired
     private MemberDao memberDao;
 

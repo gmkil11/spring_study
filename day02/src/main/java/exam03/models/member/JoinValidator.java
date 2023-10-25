@@ -1,16 +1,18 @@
-package exam02.models.member;
+package exam03.models.member;
 
 import exam02.commons.BadRequestException;
 import exam02.commons.LengthValidator;
 import exam02.commons.RequiredValidator;
 import exam02.commons.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JoinValidator implements Validator<Member>, RequiredValidator, LengthValidator {
 
     @Autowired
+    @Qualifier("memberDao")
     private MemberDao memberDao;
 
     @Override
