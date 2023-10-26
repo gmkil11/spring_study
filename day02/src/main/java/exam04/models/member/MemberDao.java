@@ -1,5 +1,6 @@
 package exam04.models.member;
 
+import exam04.config.ManualBean;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Repository;
 
