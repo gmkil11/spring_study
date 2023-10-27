@@ -15,8 +15,15 @@ public class appCtx {
         return new RecCalculator();
     }
 
+
     @Bean
     public ProxyCalculator proxyCalculator() {
         return new ProxyCalculator();
+    }
+
+
+    @Bean
+    public ProxyCached proxyCached() {
+        return new ProxyCached();
     }
 }

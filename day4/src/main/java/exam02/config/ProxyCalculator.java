@@ -6,7 +6,9 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 
+@Order(2)
 @Aspect
 public class ProxyCalculator {
     // 프록시가 제공될 범위를 설정할 수 있다.
@@ -29,7 +31,7 @@ public class ProxyCalculator {
             return result;
         } finally {
             long eTime = System.nanoTime();
-            System.out.println(eTime-sTime);
+            System.out.println("time = " + (eTime-sTime));
         }
     }
 }
