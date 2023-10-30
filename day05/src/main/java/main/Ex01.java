@@ -1,11 +1,9 @@
 package main;
 
-import config.AppCtx;
+import Class1030.config.AppCtx;
 import models.member.Member;
 import models.member.MemberDao;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.util.List;
 
 public class Ex01 {
     public static void main(String[] args) {

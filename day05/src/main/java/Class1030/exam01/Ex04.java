@@ -1,7 +1,6 @@
-package exam01;
+package Class1030.exam01;
 
-import config.AppCtx;
-import org.apache.tomcat.jdbc.pool.DataSource;
+import Class1030.config.AppCtx;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 

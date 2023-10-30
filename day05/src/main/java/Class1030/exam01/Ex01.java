@@ -1,4 +1,4 @@
-package exam01;
+package Class1030.exam01;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
