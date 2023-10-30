@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/main/java/exam01/Ex04.java" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Class1030/exam01/Ex04.java" dialect="Oracle" />
     <file url="file://$PROJECT_DIR$/src/main/java/models/member/MemberDao.java" dialect="Oracle" />
   </component>
 </project>
