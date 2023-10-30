@@ -20,14 +20,16 @@ public class Ex01 {
 //        List<Member> members = memberDao.gets();
 //        members.stream().forEach(System.out::println);
 
-//        Member member = Member.builder()
-//                        .userId("user05")
-//                        .userPw("123456")
-//                        .userNm("사용자05")
-//                        .email("user05@test.org")
-//                        .build();
-//        boolean result = memberDao.register(member);
-//        System.out.println(result);
+        Member member = Member.builder()
+                        .userId("user06")
+                        .userPw("123456")
+                        .userNm("사용자06")
+                        .email("user06@test.org")
+                        .build();
+
+        boolean result = memberDao.register(member);
+        System.out.println(result);
+        System.out.println(member);
 
         ctx.close();
     }
