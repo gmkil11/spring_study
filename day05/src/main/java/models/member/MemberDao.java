@@ -11,7 +11,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.beans.Transient;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,11 +19,12 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
+//@Transactional
 public class MemberDao {
 
     private final JdbcTemplate jdbcTemplate;
-
-/*    public boolean register(Member member) {
+    /*
+    public boolean register(Member member) {
 
         String userPw = BCrypt.hashpw(member.getUserPw(), BCrypt.gensalt(12));
         member.setUserPw(userPw);
@@ -35,38 +35,46 @@ public class MemberDao {
                 userPw, member.getEmail(), member.getUserNm(), member.getMobile());
 
         return affectedRows > 0;
-    }*/
-
-    @Transactional
+    }
+    */
+   // @Transactional
     public boolean register(Member member) {
         String userPw = BCrypt.hashpw(member.getUserPw(), BCrypt.gensalt(12));
         String sql = "INSERT INTO MEMBER (USER_NO, USER_ID, USER_PW, EMAIL, USER_NM, MOBILE) " +
                 " VALUES (SEQ_MEMBER.nextval, ?, ?, ?, ?, ?)";
-        KeyHolder keyholder = new GeneratedKeyHolder();
 
-        int affectedRows = jdbcTemplate.update( con -> {
-            PreparedStatement pstmt = con.prepareStatement(sql, new String[] {"USER_NO"});
-            pstmt.setString(1, member.getUserId());
-            pstmt.setString(2, userPw);
-            pstmt.setString(3, member.getEmail());
-            pstmt.setString(4, member.getUserNm());
-            pstmt.setString(5, member.getMobile());
-            return pstmt;
+        KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        }, keyholder);
+        int affectedRows = jdbcTemplate.update(con -> {
+                PreparedStatement pstmt = con.prepareStatement(sql, new String[] {"USER_NO"});
+                pstmt.setString(1, member.getUserId());
+                pstmt.setString(2, userPw);
+                pstmt.setString(3, member.getEmail());
+                pstmt.setString(4, member.getUserNm());
+                pstmt.setString(5, member.getMobile());
+
+                return pstmt;
+        }, keyHolder);
 
         if (affectedRows > 0) {
-            long userNo = keyholder.getKey().longValue();
+            long userNo = keyHolder.getKey().longValue();
             member.setUserNo(userNo);
         }
+
         return affectedRows > 0;
     }
 
-    public Member get(String userId) {
-        String sql = "SELECT * FROM MEMBER WHERE USER_ID = ?";
-        Member member = jdbcTemplate.queryForObject(sql, this::mapper, userId);
 
-        return member;
+    public Member get(String userId) {
+        try {
+            String sql = "SELECT * FROM MEMBER WHERE USER_ID = ?";
+            Member member = jdbcTemplate.queryForObject(sql, this::mapper, userId);
+
+            return member;
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public boolean exists(String userId) {
