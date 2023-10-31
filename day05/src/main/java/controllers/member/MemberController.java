@@ -22,12 +22,19 @@ public class MemberController {
         System.out.println(request.getParameter("userId"));
         return "member/login";
     }
- */
+
 
     @GetMapping("/member/login")
     public String login(RequestLogin form, Model model) {
         // Servlet 의 request.setAttribute 대신 사용이 가능한 기능
         model.addAttribute("message" , "안녕하세요");
+        return "member/login";
+    }*/
+
+    @GetMapping("/member/login")
+    public String login(Model model) {
+        model.addAttribute("userId", "user99");
+        model.addAttribute("userPw", "12345678");
         return "member/login";
     }
 }
