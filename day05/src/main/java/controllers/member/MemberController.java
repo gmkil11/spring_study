@@ -36,6 +36,12 @@ public class MemberController {
         return "member/login";
     }*/
 
+    @GetMapping("/member/join")
+    public String join(Model model){
+
+        return "member/join";
+    }
+
     @GetMapping("/member/login")
     public String login(Model model) {
         model.addAttribute("userId", "user99");
@@ -78,7 +84,6 @@ public class MemberController {
                 .regDt(LocalDateTime.now())
                 .build();
     }
-
 
 
 }
