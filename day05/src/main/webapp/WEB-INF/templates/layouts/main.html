@@ -3,16 +3,20 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
         <meta charset="UTF-8">
-        <title>제목...</title>
+        <title th:if="${pageTitle != null}" th:text="${pageTitle}">제목...</title>
         <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-        <link rel="stylesheet" type="text/css" th:each="file : ${addCss}" th:href="@{/css/${file}.css(file=${file})}">
+        <link rel="stylesheet" type="text/css" th:each="file : ${addCss}" th:href="@{/css/{file}.css(file=${file})}">
                                                     <!-- 1. 경로에서 css로 하나씩 꺼내와 file 변수에 담는다. 2. 변수에 있는 file을 형식에 맞춰서 교체해준다. -->
+        <th:block layout:fragment="addCss"></th:block>
         <script th:src="@{/js/common.js}"></script>
-        <script th:each="file : ${addScript}" th:href="@{js/${file}.js(file=${file})}"></script>
+        <script th:each="file : ${addScript}" th:href="@{js/{file}.js(file=${file})}"></script>
+
+        <th:block layout:fragment="addScript"></th:block>
     </head>
     <body>
         <header th:replace="~{outlines/header::common}"></header>
         <main layout:fragment="content"></main>
         <footer th:replace="~{outlines/footer::common}"></footer>
     </body>
+    <iframe name="iframeProcess" class="dn"></iframe>
 </html>

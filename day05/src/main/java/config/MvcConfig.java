@@ -83,4 +83,8 @@ public class MvcConfig implements WebMvcConfigurer {
         return new Utils();
     }
 
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("main/index");
+    }
 }

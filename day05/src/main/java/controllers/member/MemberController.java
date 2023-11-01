@@ -1,15 +1,13 @@
 package controllers.member;
 
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import models.member.Member;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -38,7 +36,11 @@ public class MemberController {
 
     @GetMapping("/member/join")
     public String join(Model model){
-
+        String[] addCss = {"member/test1", "member/test2"};
+        List<String> addScript = Arrays.asList("member/script1", "member/script2");
+        model.addAttribute("addCss",addCss);
+        model.addAttribute("addScript", addScript);
+        model.addAttribute("pageTitle", "회원가입");
         return "member/join";
     }
 
