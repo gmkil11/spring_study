@@ -5,48 +5,48 @@
 
     <main layout:fragment="content">
         <h1>회원가입</h1>
-        <form method="post" th:action="@{/member/join}">
+        <form method="post" th:action="@{/member/join}" th:object="${requestJoin}">
             <dl>
                 <dt>아이디</dt>
                 <dd>
-                    <input type="text" name="userId">
+                    <input type="text" name="userId" th:field="*{userId}">
                 </dd>
             </dl>
             <dl>
                 <dt>비밀번호</dt>
                 <dd>
-                    <input type="password" name="userPw">
+                    <input type="password" name="userPw" th:field="*{userPw}">
                 </dd>
             </dl>
             <dl>
                 <dt>비밀번호 확인</dt>
                 <dd>
-                <input type="password" name="confirmUserPw">
+                <input type="password" name="confirmUserPw" th:field="*{confirmUserPw}">
                 </dd>
             </dl>
             <dl>
                 <dt>회원명</dt>
                 <dd>
-                    <input type="text" name="userNm">
+                    <input type="text" name="userNm" th:field="*{userNm}">
                 </dd>
             </dl>
             <dl>
                 <dt>이메일</dt>
                 <dd>
-                    <input type="text" name="email">
+                    <input type="text" name="email" th:field="*{email}">
                 </dd>
             </dl>
             <dl>
                 <dt>휴대전화번호</dt>
                 <dd>
-                    <input type="text" name="mobile">
+                    <input type="text" name="mobile" th:field="*{mobil}">
                 </dd>
             </dl>
             <div>
-                <input type="checkbox" name="agree" value="true" id="agree">
+                <input type="checkbox" name="agree" value="true" id="agree" th:field="*{agree}">
                 <lable for="agree">회원가입 약관에 동의합니다.</lable>
-            </div>
-            <button type="submit">가입하기</button>
+                </div>
+                <button type="submit">가입하기</button>
         </form>
     </main>
 

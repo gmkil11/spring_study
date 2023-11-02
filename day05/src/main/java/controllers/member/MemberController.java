@@ -2,7 +2,9 @@ package controllers.member;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,15 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 
     @GetMapping("/join")
-    public String join(){
+    public String join(@ModelAttribute RequestJoin join){
+        // @ModelAttribute("명칭") -> 명칭 안 적을 시 클래스명(기본값)
+
         return "member/join";
     }
 
 //    @RequestMapping(method = RequestMethod.POST , path="/member/join")
     @PostMapping("/join")
-    public String joinPs(){
-        System.out.println("post Mapping 유입 완료");
-        return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+    public String joinPs(RequestJoin join, Model model){
+//        System.out.println(join);
+//        model.addAttribute(model);
+        return  "member/join";
+//        return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
     }
 
     @GetMapping("/login")
