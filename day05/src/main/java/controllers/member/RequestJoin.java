@@ -9,6 +9,6 @@ public class RequestJoin {
     private String confirmUserPw;
     private String email;
     private String userNm;
-    private String mobil;
+    private String mobile;
     private boolean agree;
 }

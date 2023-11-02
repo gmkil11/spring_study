@@ -1,8 +1,9 @@
 package controllers.member;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,7 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/member") // 공통 URL 을 설정하는 것이라서 다른 mapping url에 /member를 빼도 된다.
+@RequiredArgsConstructor // 스프링이 객체를 관리할 수 있게 롬복을 통해 생성자를 상수화를 통해 건내준다.
 public class MemberController {
+
+
+    private final JoinValidator joinValidator;
 
     @GetMapping("/join")
     public String join(@ModelAttribute RequestJoin join){
@@ -21,10 +26,15 @@ public class MemberController {
 
 //    @RequestMapping(method = RequestMethod.POST , path="/member/join")
     @PostMapping("/join")
-    public String joinPs(RequestJoin join, Model model){
-//        System.out.println(join);
-//        model.addAttribute(model);
-        return  "member/join";
+    public String joinPs(RequestJoin join, Errors errors){
+        joinValidator.validate(join,errors); // 검증
+
+        if (errors.hasErrors()){
+            // 검증 실페시 유입
+            return "member/join";
+        }
+        // 검증 성공시 유입
+        return  "member/login";
 //        return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
     }
 
