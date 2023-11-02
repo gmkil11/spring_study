@@ -1,23 +1,41 @@
 package controllers.member;
 
 
-import models.member.Member;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.IntStream;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/member") // 공통 URL 을 설정하는 것이라서 다른 mapping url에 /member를 빼도 된다.
 public class MemberController {
+
+    @GetMapping("/join")
+    public String join(){
+        return "member/join";
+    }
+
+//    @RequestMapping(method = RequestMethod.POST , path="/member/join")
+    @PostMapping("/join")
+    public String joinPs(){
+        System.out.println("post Mapping 유입 완료");
+        return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "member/login";
+    }
+
+    @PostMapping("/login")
+    public String loginPs(){
+        return "member/login";
+    }
 /*    @Autowired
     private HttpServletRequest request;
 
 
-    @GetMapping("/member/login")
+    @GetMapping("/login")
     public String login(RequestLogin form, HttpServletRequest req, HttpServletResponse resp) {
         System.out.println(form);
         req.setAttribute("message", form);
@@ -27,14 +45,14 @@ public class MemberController {
     }
 
 
-    @GetMapping("/member/login")
+    @GetMapping("/login")
     public String login(RequestLogin form, Model model) {
         // Servlet 의 request.setAttribute 대신 사용이 가능한 기능
         model.addAttribute("message" , "안녕하세요");
         return "member/login";
-    }*/
+    }
 
-    @GetMapping("/member/join")
+    @GetMapping("/join")
     public String join(Model model){
         String[] addCss = {"member/test1", "member/test2"};
         List<String> addScript = Arrays.asList("member/script1", "member/script2");
@@ -44,7 +62,7 @@ public class MemberController {
         return "member/join";
     }
 
-    @GetMapping("/member/login")
+    @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("userId", "user99");
         model.addAttribute("userPw", "12345678");
@@ -68,7 +86,7 @@ public class MemberController {
 
     }
 
-    @GetMapping("/member/list")
+    @GetMapping("/list")
     public String memberList(Model model){
         List<Member> members = IntStream.rangeClosed(1, 10).mapToObj(this::addMember).toList();
         model.addAttribute("members",members);
@@ -87,5 +105,5 @@ public class MemberController {
                 .build();
     }
 
-
+*/
 }

@@ -5,6 +5,49 @@
 
     <main layout:fragment="content">
         <h1>회원가입</h1>
+        <form method="post" th:action="@{/member/join}">
+            <dl>
+                <dt>아이디</dt>
+                <dd>
+                    <input type="text" name="userId">
+                </dd>
+            </dl>
+            <dl>
+                <dt>비밀번호</dt>
+                <dd>
+                    <input type="password" name="userPw">
+                </dd>
+            </dl>
+            <dl>
+                <dt>비밀번호 확인</dt>
+                <dd>
+                <input type="password" name="confirmUserPw">
+                </dd>
+            </dl>
+            <dl>
+                <dt>회원명</dt>
+                <dd>
+                    <input type="text" name="userNm">
+                </dd>
+            </dl>
+            <dl>
+                <dt>이메일</dt>
+                <dd>
+                    <input type="text" name="email">
+                </dd>
+            </dl>
+            <dl>
+                <dt>휴대전화번호</dt>
+                <dd>
+                    <input type="text" name="mobile">
+                </dd>
+            </dl>
+            <div>
+                <input type="checkbox" name="agree" value="true" id="agree">
+                <lable for="agree">회원가입 약관에 동의합니다.</lable>
+            </div>
+            <button type="submit">가입하기</button>
+        </form>
     </main>
 
 </html>
