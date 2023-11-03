@@ -1,7 +1,9 @@
 package controllers.member;
 
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import models.member.JoinService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ public class MemberController {
 
 
     private final JoinValidator joinValidator;
+    private final JoinService joinService;
 
     @GetMapping("/join")
     public String join(@ModelAttribute RequestJoin join){
@@ -26,14 +29,17 @@ public class MemberController {
 
 //    @RequestMapping(method = RequestMethod.POST , path="/member/join")
     @PostMapping("/join")
-    public String joinPs(RequestJoin join, Errors errors){
-        joinValidator.validate(join,errors); // 검증
+    public String joinPs(@Valid RequestJoin join, Errors errors){ // 순서가 중요하다. 커맨드 객체 바로 뒤에 존재해야 인식한다.
+        System.out.println("데이터 확인 : " + join );
+
+        joinValidator.validate(join,errors); // 검증 / 하지만 현재 MvcConfig에서 전역 Validator를 설정해줬기 때문에 필요 없다.
 
         if (errors.hasErrors()){
             // 검증 실페시 유입
             return "member/join";
         }
         // 검증 성공시 유입
+        joinService.join(join);
         return  "member/login";
 //        return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
     }
@@ -47,6 +53,23 @@ public class MemberController {
     public String loginPs(){
         return "member/login";
     }
+
+
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder){
+//        binder.setValidator(joinValidator);
+//    }
+
+
+
+
+
+
+
+
+
+
+
 /*    @Autowired
     private HttpServletRequest request;
 
