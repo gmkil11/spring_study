@@ -1,12 +1,15 @@
 package controllers.member;
 
 
+import commons.BadRequestException;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import models.member.DuplicateMemberException;
 import models.member.JoinService;
 import models.member.LoginService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,10 +39,10 @@ public class MemberController {
 
         joinValidator.validate(join,errors); // 검증 / 하지만 현재 MvcConfig에서 전역 Validator를 설정해줬기 때문에 필요 없다.
 
-        if (errors.hasErrors()){
-            // 검증 실패시 유입
-            return "member/join";
-        }
+//        if (errors.hasErrors()){
+//            // 검증 실패시 유입
+//            return "member/join";
+//        }
         // 검증 성공시 유입
         joinService.join(join);
         return  "member/login";
@@ -76,6 +79,13 @@ public class MemberController {
     public String logout(HttpSession session){
         session.invalidate();
         return "redirect:/member/login";
+    }
+
+    @ExceptionHandler({BadRequestException.class, DuplicateMemberException.class})
+    public String errorHandler(RuntimeException e, Model model) {
+        e.printStackTrace();
+        model.addAttribute("message", e.getMessage());
+        return "error/common";
     }
 
 

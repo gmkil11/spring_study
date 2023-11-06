@@ -88,14 +88,39 @@ public class MvcConfig implements WebMvcConfigurer {
 
         return ms;
     }
-
     @Bean
     public Utils utils() {
         return new Utils();
     }
 
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("main/index");
+        registry.addViewController("/")
+                .setViewName("main/index");
+
+        registry.addViewController("/mypage/**")
+                .setViewName("member/mypage");
+
     }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(memberOnlyInterceptor())
+                .addPathPatterns("/mypage/**");
+
+        registry.addInterceptor(commonInterceptor())
+                .addPathPatterns("/**");
+    }
+
+    @Bean
+    public MemberOnlyInterceptor memberOnlyInterceptor() {
+        return new MemberOnlyInterceptor();
+    }
+    @Bean
+    public CommonInterceptor commonInterceptor() {
+        return new CommonInterceptor();
+    }
+
 }
+
