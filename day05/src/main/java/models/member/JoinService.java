@@ -19,6 +19,8 @@ public class JoinService {
         Member member = new ModelMapper().map(form, Member.class);
 
         memberDao.register(member);
+
+
     }
 
 

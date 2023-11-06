@@ -149,6 +149,11 @@ p {
 
 /* 객실 상세보기 시작*/
 /* 스위퍼 시작 */
+.swiper-box{
+    width: 80vw;
+    margin: auto;
+}
+
 .swiper {
     width: 100%;
     height: 100%;
@@ -171,9 +176,10 @@ p {
 }
 
 
+
 .swiper {
-    width: 50vw;
-    height: 300px;
+    width: 100%;
+    height: 50vh;
     margin-left: auto;
     margin-right: auto;
 }
@@ -184,7 +190,6 @@ p {
 }
 
 .mySwiper2 {
-    height: 80%;
     width: 100%;
 }
 
@@ -196,7 +201,7 @@ p {
 
 .mySwiper .swiper-slide {
     width: 25%;
-    height: 100%;
+    height: 20vh;
     opacity: 0.4;
 }
 
@@ -207,7 +212,16 @@ p {
 .swiper-slide img {
     display: block;
     width: 100%;
+    height: 100%;
     object-fit: cover;
 }
+
+
+
+
 /* 스위퍼 끝 */
+/*객실 설명*/
+.room-exp{
+    margin: auto;
+}
 /* 객실 상세보기 끝*/
