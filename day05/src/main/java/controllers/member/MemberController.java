@@ -1,15 +1,12 @@
 package controllers.member;
 
 
-import commons.BadRequestException;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import models.member.DuplicateMemberException;
 import models.member.JoinService;
 import models.member.LoginService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -81,12 +78,7 @@ public class MemberController {
         return "redirect:/member/login";
     }
 
-    @ExceptionHandler({BadRequestException.class, DuplicateMemberException.class})
-    public String errorHandler(RuntimeException e, Model model) {
-        e.printStackTrace();
-        model.addAttribute("message", e.getMessage());
-        return "error/common";
-    }
+
 
 
 //    @InitBinder
