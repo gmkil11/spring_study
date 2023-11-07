@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+
 @Controller
 @RequestMapping("/file/upload")
 public class FileController {
@@ -17,7 +20,12 @@ public class FileController {
 
     @PostMapping
     public String uploadPs(MultipartFile file) {
-
+        File path = new File("/Users/mingyugil/Documents/upload/" + file.getOriginalFilename());
+        try {
+            file.transferTo(path);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return "file/upload";
     }
 
